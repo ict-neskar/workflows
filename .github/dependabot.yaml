@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+      timezone: Asia/Jakarta
+    target-branch: main
+    open-pull-requests-limit: 99
+    groups:
+      major:
+        update-types:
+          - major
+        patterns:
+          - '*'
+      nonMajor:
+        update-types:
+          - minor
+          - patch
+        patterns:
+          - '*'
