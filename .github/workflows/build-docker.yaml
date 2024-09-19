@@ -36,6 +36,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get current unix timestamp
+        id: timestamp
+        uses: release-kit/unix-timestamp@7ca717caac85efbb45f438eccf3326f54f90947f # v1
+
       - name: Generate Docker image metadata
         uses: docker/metadata-action@v5.5.1
         id: img_meta
@@ -48,7 +52,10 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
             type=ref,event=branch
+            type=ref,event=branch,suffix=-${{ steps.timestamp.outputs.timestamp }}
             type=sha,prefix=,suffix=,format=short
+            type=sha,prefix=,suffix=,format=long
+
 
       - name: Build and push
         id: docker_build
