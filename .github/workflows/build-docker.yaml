@@ -14,11 +14,17 @@ jobs:
   build:
     runs-on: ${{ fromJson(inputs.runs-on) }}
     steps:
+      - name: Install Git LFS
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-lfs
+          git lfs install --skip-repo
+        
       - name: Checkout repository
         id: checkout
         uses: actions/checkout@v4.2.2
         with:
-          lfs: false
+          lfs: true
           submodules: true
 
       #- name: Set up QEMU (We don't need QEMU, because we don't build images for platforms other than linux/amd64, which is our current native arch in our infra
