@@ -78,3 +78,4 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}"
+            "APP_VERSION=${{ steps.img_meta.outputs.version }}"
